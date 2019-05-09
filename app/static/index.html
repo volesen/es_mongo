@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ES test</title>
+
+    <!-- Bulma import -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!-- Bulma extensions -->
+    <script src="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.5/dist/js/bulma-extensions.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.5/dist/css/bulma-extensions.min.css">
+
+    <!-- Vue and Axios import -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <section class="section">
+            <div class="columns">
+                <!-- TODO form -->
+                <div class="column">
+                    <form class="form-horizontal" action="http://localhost:5000/todo" method="POST">
+                        <fieldset>
+
+                            <!-- Form Name -->
+                            <legend class="title">Add Todo item</legend>
+
+                            <!-- Text input-->
+                            <div class="field">
+                                <label class="label" for="title">Title</label>
+                                <div class="control">
+                                    <input id="title" name="title" type="text" placeholder="Todo title" class="input ">
+
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="field">
+                                <label class="label" for="description">Description</label>
+                                <div class="control">
+                                    <input id="description" name="description" type="text"
+                                        placeholder="Todo description" class="input ">
+
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="field">
+                                <label class="label" for="submit"></label>
+                                <div class="control">
+                                    <button @submit.prevent id="submit" name="submit"
+                                        class="button is-primary">Submit</button>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!-- Divider -->
+                <div class="is-divider-vertical" data-content=""></div>
+
+                <!-- First search box -->
+                <div class="column">
+                    <form class="form-horizontal">
+                        <fieldset>
+
+                            <!-- Form Name -->
+                            <legend class="title">Mongoengine search</legend>
+
+                            <!-- Search input-->
+                            <div class="field">
+                                <label class="label">Search for word match</label>
+                                <div class="control">
+                                    <input type="text" placeholder="Search for keywords"
+                                        class="input is-rounded  search-query" v-model="inputMongo">
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+                    </form>
+                    <!-- Horizontal divider -->
+                    <div class="is-divider" data-content="Todo items"></div>
+
+                    <!-- Todo list -->
+                    <todo-item v-for="todo in todosMongo.slice(0,5)" v-bind:todo="todo"></todo-item>
+
+                </div>
+
+                <!-- Divider -->
+                <div class="is-divider-vertical"></div>
+
+                <!-- Second search box -->
+                <div class="column">
+                    <form class="form-horizontal">
+                        <fieldset>
+
+                            <!-- Form Name -->
+                            <legend class="title">Elasticsearch</legend>
+
+                            <!-- Search input-->
+                            <div class="field">
+                                <label class="label">Search for word match</label>
+                                <div class="control">
+                                    <input type="text" placeholder="Search for keywords"
+                                        class="input is-rounded search-query" v-model="inputEs">
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </form>
+                    <!-- Horizontal divider -->
+                    <div class="is-divider" data-content="Todo items"></div>
+
+                    <!-- Todo list -->
+                    <todo-item v-for="todo in todosEs.slice(0,5)" v-bind:todo="todo"></todo-item>
+
+                </div>
+
+            </div>
+        </section>
+    </div>
+    <script src="static/app.js"></script>
+
+</body>
+
+</html>
